@@ -43,7 +43,7 @@
     </div>
   </article>
 
-  <form action="reply/post/{{ post.id }}" method="POST">
+  <form id='post' action="reply/post/{{ post.id }}" method="POST">
     {% csrf_token %}
     <div class="media content-comment">
       <div class="col-md-9 col-sm-9 col-9 pr-0 comment-box">
