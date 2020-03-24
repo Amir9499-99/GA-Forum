@@ -32,7 +32,7 @@ body {
   .site-header .navbar-nav .nav-link {
     color: #FFFFFF;
     margin: 0 60px 0 0; 
-    font-size: 16px;
+    font-size: 18px;
   }
   .mr-auto{
     float: right !important;
@@ -47,6 +47,7 @@ body {
     text-align: left;
     border-radius: 5px;
     margin-left: 10px;
+    font-size: 25px;
   }
 
   .site-header .navbar-nav .nav-link:hover {
@@ -124,6 +125,14 @@ body {
     overflow:auto;
 }
 
+.comment-box{
+  display: flex !important;
+  align-content: center !important;
+  align-items: center;
+  justify-content: center;
+  width: 98%;
+}
+
 .comment-wrapper .media-list .media img {
     width:64px;
     height:64px;
@@ -158,39 +167,34 @@ body {
   padding-top: 0 !important;
   margin: 0 !important;
   padding: 0;
+  position:relative;
+}
+
+#post-input{
+  /* width: 500px; */
 }
 
 .comment-input {
   border: white;
   margin-top: 6px;
   border-radius: 5px;
-  width: 650px;
+  width: 700px;
+  border-radius: 6px;
 }
 
 .comment-date {
   float: right;
 }
 
-.btn-info {
-  margin-right: -140px !important;
+.send-btn {
+  margin-right: 0 !important;
 }
 
-.post-input{
-  border-radius: 6px;
-  max-width: 500px;
-  
+.content-header{
+  text-align: left;
 }
 
-.post-input:active{
-  border-color: #428bca;
-}
-
-.post-add{
-  border-radius: 6px;
-  margin-left: 5px;
-}
-
-.post-add:hover{
+.comment-input:active{
   border-color: #428bca;
 }
 
