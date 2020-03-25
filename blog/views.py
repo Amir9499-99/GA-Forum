@@ -12,9 +12,12 @@ from django.contrib import messages
 
 def home(request):
     context = {
-        'posts':Post.objects.all()
+        'posts':reversed(Post.objects.all())
     }
     return render(request,'blog/home.html',context)
+
+def about(request):
+    return render(request,'blog/about.html')
 
 @login_required
 def post_create(request):

@@ -19,4 +19,11 @@ function showProfile(element) {
     //   });
   }
 
+  function like(){
+   let button = document.querySelector('.fa-thumbs-up');
+   let count = document.getElementById('like'); 
+    count.textContent = 0;
 
+    button.onclick = function(){
+    count.textContent++;
+  }
