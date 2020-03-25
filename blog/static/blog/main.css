@@ -166,12 +166,35 @@ body {
   #logo{
     text-align: left;
     border-radius: 5px;
-    margin-left: 70px;
     font-size: 25px;
+    position: absolute;
+    left:18%;
+  }
+
+  .loggedIn {
+    margin-left: 5px;
+    margin-top: 2px;
+    height: 15px;
+    width: 15px;
+    background-color:rgb(30, 175, 30);
+    border-radius: 50%;
+  }
+
+  .loggedOut {
+    margin-left: 5px;
+    margin-top: 2px;
+    height: 15px;
+    width: 15px;
+    background-color:rgb(196, 36, 36);
+    border-radius: 50%;
   }
 
   .site-header .navbar-nav .nav-link:hover {
     color: #ffffff;
+  }
+  .navbar{
+    position:relative;
+    height: 55px;
   }
   
   .site-header .navbar-nav .nav-link.active {
@@ -260,6 +283,8 @@ body {
   width: 100%;
 }
 
+
+
 .comment-wrapper .media-list .media img {
     width:64px;
     height:64px;
@@ -296,6 +321,8 @@ body {
   display: flex;
   flex-direction: left;
 }
+
+
 .posts {
   margin: 40px 0 40px 0 !important;
   box-shadow: 3px 3px 3px 3px rgb(116, 116, 116);

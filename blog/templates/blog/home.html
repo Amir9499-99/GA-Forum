@@ -2,8 +2,22 @@
 {% load static %}
 
 {% block content %}
-
 <h1 style="text-align: center; color: white; font-weight: 600; font-size: 50px;">Home_Page</h1>
+{% if user.is_authenticated %}
+
+<div class = "flexMe">
+    <p class = 'text-muted'>logged in as {{user.username}} </p> 
+  <div class = "loggedIn"></div>
+</div>
+
+  {%else%}
+  <div class = "flexMe">
+    <p class = 'text-muted'>Not Logged In </p> 
+  <div class = "loggedOut"></div>
+</div>
+  
+{%endif%}
+
 
 
 <form action="/post" method="post">
@@ -43,7 +57,7 @@
       <div class ='collapsibleContent'>
       {% for comment in post.reply_set.all %}
       <div class = "flexMe replyBackground">
-      <img class = "images" src='{{post.author.profile.profile_pic.url}}' width="20" height="20" border-radius="10" style="margin-right: 0px;">
+      <img class = "images" src='{{comment.author.profile.profile_pic.url}}' width="20" height="20" border-radius="10" style="margin-right: 0px;">
       <p style="margin-left: 15px;"><a class="mr-2" href="#">{{ comment.author }}:</a> {{ comment.strContent }} </p>
       <p class = "dateRight"><span class="comment-date"><small class="text-muted">  {{ comment.date }}</small></span></p>
     </div>
