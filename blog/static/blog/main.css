@@ -120,6 +120,7 @@ body {
   
   .bg-steel {
     background-color: #000000;
+    
   }
   
   #main-content, .row{
@@ -214,6 +215,7 @@ body {
   #navbar-container{
     width: 100% !important;
     max-width: 100% !important;
+    position: red;
   }
   
   .article-title {
