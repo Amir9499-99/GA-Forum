@@ -3,37 +3,52 @@
 
 {% block content %}
 
-<h1 style="text-align: center;">Home_Page</h1>
+<h1 style="text-align: center; color: white; font-weight: 600; font-size: 50px;">Home_Page</h1>
 
-<!------ Include the above in your HEAD tag ---------->
 
 <form action="/post" method="post">
   {% csrf_token %}
-  <table>
-    <input class="comment-input" type="text" name="post-input" placeholder="Add post">
+  <div id= "add-post-container">
+    <input class="post-input" type="text" name="post-input" placeholder="    whats on your mind ....">
     <input id="post-add" type="submit" value="Add Post" class="btn btn-info">
-  </table>
+  </div>
 </form>
 
 
 {% for post in posts %}
 
+
 <div class = "wholePost">
 
-<div class="comments">
+<div class="posts">
   <article class="media content-section">
       <img class = "images" src='{{post.author.profile.profile_pic.url}}' width="45" height="45" border-radius="10" style="margin-right: 15px;">
 
     <div class="media-body">
       <div class="article-metadata">
-        <a class="mr-2" href="#">{{ post.author }}</a>
+        <a id="author" class="mr-2" href="#">{{ post.author }}</a>
         <small class="text-muted">{{ post.date }}</small>
+        {% if post.author.username == request.user.username%}
+        <form class = "right" action="post/delete/{{ post.id }}" method="POST">
+          {% csrf_token %}
+
+          <button type = "submit" >X</button>
+        </form>
+    
+      {%endif%}
       </div>
       <p class="article-content">{{ post.strContent }}</p>
       <br>
+      <button class="collapsible">See Replys</button>
+      <div class ='collapsibleContent'>
       {% for comment in post.reply_set.all %}
-      <p><a class="mr-2" href="#">{{ comment.author }}:</a> {{ comment.strContent }} <span class="comment-date"><small class="text-muted">  {{ comment.date }}</small></span></p>
+      <div class = "flexMe replyBackground">
+      <img class = "images" src='{{post.author.profile.profile_pic.url}}' width="20" height="20" border-radius="10" style="margin-right: 0px;">
+      <p style="margin-left: 15px;"><a class="mr-2" href="#">{{ comment.author }}:</a> {{ comment.strContent }} </p>
+      <p class = "dateRight"><span class="comment-date"><small class="text-muted">  {{ comment.date }}</small></span></p>
+    </div>
       {% endfor %}
+    </div>
     </div>
   </article>
 
@@ -41,7 +56,7 @@
     {% csrf_token %}
     <div class="media content-comment">
       <div class="comment-box">
-        <input type="text" class="comment-input" name="input-comment" placeholder="    comment ...." />
+        <input type="text" class="comment-input" name="input-comment" placeholder="    add a reply ....">
         <input type="hidden" name="currentpath" value="{{ request.path }}">
         <button class="btn btn-info" type="submit">Send</button>
       </div>
@@ -78,9 +93,8 @@
 </div>
 
 
+
 {% endfor %}
-
-
 
 
 <script>
@@ -100,6 +114,24 @@
       }
     })
   }
+
+
+
+  var coll = document.getElementsByClassName("collapsible");
+  var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.maxHeight){
+      content.style.maxHeight = null;
+    } else {
+      content.style.maxHeight = content.scrollHeight + "px";
+    } 
+  });
+}
+
 </script>
 
 

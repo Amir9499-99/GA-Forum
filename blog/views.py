@@ -31,3 +31,10 @@ def reply_create(request, post_id):
     reply.save()
     next = request.POST.get('currentpath', '/')
     return redirect(next)
+
+
+def post_delete(request,post_id):
+    Post.objects.filter(id=post_id).delete()
+    next = request.POST.get('currentpath', '/')
+    return redirect(next)
+     

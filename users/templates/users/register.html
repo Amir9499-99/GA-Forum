@@ -4,15 +4,17 @@
 {% load crispy_forms_tags%}
 
 {% block content%}
-<h3 align = "center" class = "text-muted">Already Have An Account? <a class = "ml-2" href = "{%url 'login'%}">Sign In</a></h3><br>
-
-<div class = "content-section">
+<div class = "background-div">
+<h3 align = "center" class = "white">Already Have An Account? <a class = "ml-2 blue" href = "{%url 'login'%}">Sign In</a></h3><br>
+</div>
+<div class = "content-section francis">
     <form method = "POST">
         {%csrf_token%}
 
         <fieldset class = "form-group">
 
             <legend class = "border-bottom">Join Today </legend>
+            <br>
 
             {{form|crispy}}
         </fieldset>

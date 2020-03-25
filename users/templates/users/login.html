@@ -1,14 +1,15 @@
+{% extends 'blog/base.html' %}
 
-{%extends "blog/base.html" %}
-
-{% load crispy_forms_tags%}
+{% load crispy_forms_tags %}
 
 {% block content%}
-<div class = "content-section">
+
+
+<div class = "content-section francis makeBigger">
     <form method = "POST">
         {%csrf_token%}
         <fieldset class = "form-group">
-            <legend class = "border-bottom">Log In</legend>
+            <legend class = "border-bottom biggerText">Log In</legend>
             {{form|crispy}}
         </fieldset>
         <div class = "form-group">
@@ -16,8 +17,8 @@
         </div>
     </form>
     <div class = "border-top pt-3">
-        <small class = "text-muted">Create An Account <a class = "ml-2" href = "{% url 'registerUser'%}">Sign Up Now</a></small>
+        <small class = "text-muted mediumText">Create An Account <a class = "ml-2" href = "{% url 'registerUser'%}">Sign Up Now</a></small>
     </div>
 </div>
 
-{%endblock content%}
+{% endblock content %}

@@ -2,10 +2,113 @@
     font-family: 'Baloo 2', cursive;
   }
 body {
-    background: #fafafa;
-    color: #333333;
-    margin-top: 5rem;
+  color: #333333;
+  margin-top: 5rem;
+  background-image: url(https://i.imgur.com/PdGWsvz.jpg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-attachment: fixed;
+  background-color: #F5F5F5 !important;
   }
+
+  .replyBackground{
+    position: relative;
+    
+    box-shadow: 1px 1px 1px 1px rgb(116, 116, 116);
+    margin: 7px 0px 7px 0px;
+    background-color: white;
+
+
+  }
+
+  .collapsible {
+    background-color: #777;
+    color: white;
+    cursor: pointer;
+    padding: 8px;
+    width: 94%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+
+  .active, .collapsible:hover {
+    background-color: #555;
+  }
+  .collapsible:after {
+    content: '\002B';
+    color: white;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2212";
+  }
+
+  
+
+  .collapsibleContent {
+    width: 94%;
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background-color: white;
+  }
+
+
+  .francis input{
+    font-size: 20px;
+    height: 40px;
+    padding-top:6px;
+    padding-bottom:6px;
+    /* border: 1px solid grey */
+  }
+
+  .makeBigger{
+    width: 700px;
+   
+  }
+  
+  /* .background-div{
+    background-color:linen;
+  } */
+  .white{
+    color: white;
+  }
+  .blue{
+    color:  #428bca;
+  }
+ 
+  .francis{
+    font-size: 18px;
+    
+  }
+  .francis button{
+    font-size: 18px;
+    border: 2px solid rgb(19, 196, 209)
+
+  }
+  .underline{
+    margin-top: 5px;
+    text-decoration: underline;
+    color: #428bca;
+    font-size: 26px;
+  }
+
+  .biggerText{
+    font-size: 25px;
+  }
+  .mediumText{
+    font-size: 16px;
+
+  }
+ 
+  
   
   h1, h2, h3, h4, h5, h6 {
     color: #444444;
@@ -15,7 +118,6 @@ body {
     margin: 0;
   }
   
- 
   .bg-steel {
     background-color: #000000;
   }
@@ -30,12 +132,25 @@ body {
   }
   
   .site-header .navbar-nav .nav-link {
-    color: #FFFFFF;
+    color: white;
     margin: 0 60px 0 0; 
-    font-size: 18px;
+    font-size: 20px;
   }
+
+  .nav-link:hover{
+  opacity:0.9;
+  }
+
+
+
   .mr-auto{
     float: right !important;
+  }
+  
+
+  #author {
+    font-size: 18px;
+    font-weight: 500;
   }
   
   .mr-4{
@@ -43,10 +158,15 @@ body {
     font-size: 60px;
   }
   
+  .mr-4:hover{
+    background-color: rgb(209, 35, 44);
+    font-size: 60px;
+  }
+
   #logo{
     text-align: left;
     border-radius: 5px;
-    margin-left: 10px;
+    margin-left: 70px;
     font-size: 25px;
   }
 
@@ -60,11 +180,12 @@ body {
   
   
   .content-section {
-    background: #ffffff;
+    background: #F5F5F5 ;
     padding: 10px 20px;
     border: 1px solid #dddddd;
     border-radius: 3px;
     margin: 0;
+    border: 1px solid black;
   }
 
   #navbar-container{
@@ -83,6 +204,7 @@ body {
   
   .article-content {
     white-space: pre-line;
+    font-size: 16px;
   }
   
   .article-img {
@@ -90,6 +212,11 @@ body {
     width: 65px;
     margin-right: 16px;
   }
+
+  .right{
+    float: right;
+  }
+  
   
   .article-metadata {
     padding-bottom: 1px;
@@ -130,7 +257,7 @@ body {
   align-content: center !important;
   align-items: center;
   justify-content: center;
-  width: 98%;
+  width: 100%;
 }
 
 .comment-wrapper .media-list .media img {
@@ -149,7 +276,7 @@ body {
   flex-direction:left;
 }
 
-.popover {
+.popover {  
   max-width: 60% !important;
   width: 55% !important;
   height: 100% !important;
@@ -158,27 +285,62 @@ body {
   box-shadow: none !important;
 }
 
-.comments {
-  margin: 40px 0 40px 0 !important;
+.dateRight{
+  position:absolute;
+  right: 2%;
 }
 
-.content-comment {
-  background-color: #5F788A;
-  padding-top: 0 !important;
-  margin: 0 !important;
-  padding: 0;
+
+
+.flexMe{
+  display: flex;
+  flex-direction: left;
+}
+.posts {
+  margin: 40px 0 40px 0 !important;
+  box-shadow: 3px 3px 3px 3px rgb(116, 116, 116);
+  border: solid black 1px;
+  border-radius: 10px;
   position:relative;
 }
 
-#post-input{
-  /* width: 500px; */
+.content-comment {
+  background-color: black;
+  padding-top: 0 !important;
+  margin: 0 !important;
+  padding: 5px 0;
+  position:relative;
+  width: 100% !important;
 }
+#add-post-container{
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 100%;
+  display:flex;
+  flex-direction: left;
+}
+.post-input{
+  width: 86%;
+  height: 50px;  
+  border-radius: 5px;
+}
+
+#post-add:hover{
+  border: grey 1px solid;
+}
+#post-add{
+  font-size: 22px;
+}
+
 
 .comment-input {
   border: white;
-  margin-top: 6px;
   border-radius: 5px;
-  width: 700px;
+  margin-top: 4px;
+  margin-left: 3px;
+  margin-right: 3px;
+  width: 695px;
+  height: 27px;
   border-radius: 6px;
 }
 
@@ -203,17 +365,18 @@ body {
   text-decoration: underline;  
 }
 
-
-
 .login_box{
   color: linen;
 }
 
 .profile-username{
   font-weight: 300;
+<<<<<<< HEAD
 }
 
 
 #post{
   width: 100%;
+=======
+>>>>>>> 81ba7d8a89e8223f73547923eb21fc0a0da512ad
 }

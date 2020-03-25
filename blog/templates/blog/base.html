@@ -35,7 +35,7 @@
   <header class="site-header">
     <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
       <div class="container" id="navbar-container">
-        <a id="logo" class="navbar-brand mr-4" href="#">GA_Forum</a>
+        <a id="logo" class="navbar-brand mr-4" href="/">GA_Forum</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle"
           aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -64,7 +64,8 @@
   </header>
   <main role="main" class="container">
     <div class="row" id="main-content">
-      <div class="col-md-8">
+      <!-- class="col-md-8" was applied to the line below -->
+      <div style="margin: 0 auto;">
         {%if messages%}
         {%for message in messages%}
         <div class="alert alert-{{message.tags}}">
@@ -77,22 +78,22 @@
 
         {% block content %}{% endblock %}
       </div>
-      <div class="col-md-4" id="sidebar">
+      <!-- <div class="col-md-4" id="sidebar">
         <div class="content-section">
           <h3>Our Sidebar</h3>
 
-          <!-- <p class='text-muted'>You can put any information here you'd like.
+          <p class='text-muted'>You can put any information here you'd like.
             <ul class="list-group">
               <li class="list-group-item list-group-item-light">Latest Posts</li>
               <li class="list-group-item list-group-item-light">Announcements</li>
               <li class="list-group-item list-group-item-light">Calendars</li>
               <li class="list-group-item list-group-item-light">etc</li>
             </ul>
-          </p> -->
+          </p>
         </div>
-      </div>
-    </div>
+      </div> -->
 
+    </div>
   </main>
 
 
