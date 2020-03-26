@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from PIL import Image
+from django import forms
+from datetime import date
+
 
 
 
@@ -29,10 +32,15 @@ class Reply(models.Model):
 
 
 
+
+
 class Event(models.Model):
     host = models.OneToOneField(User, on_delete=models.CASCADE)
-    date = models.DateTimeField(default=timezone.now)
+    date = models.DateField(default=timezone.now)
     location = models.CharField(max_length=150,default='over zoom :(')
     description = models.CharField(max_length=300,default='very fun time')
     num_attendees = models.IntegerField(default=0)
+    photo = models.ImageField(default='profile_pics/unknown.png',upload_to='profile_pics')
+
+    # models.ImageField(default='profile_pics/unknown.png',upload_to='profile_pics')
 

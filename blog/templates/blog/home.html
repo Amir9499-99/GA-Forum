@@ -35,21 +35,35 @@
 
 <div id="mySidebar" class="sidebar">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <a href="#">What's on the Calender?</a>
+  <div id="event-navbar" class="flexMe">
+    <a class="event-navbar-text" href="#">Upcoming Events</a>
+    <a class="event-navbar-text" href="#">Create Event</a>
+  </div>
+  <br><br><br>
+  
+
+  <div class = "content-section francis">
     {{event_creation_form|crispy}}
+    <div class = "form-group">
+      <br><br>
+      <button class = "btn btn-outline-info" type = "submit">Submit</button>
+  </div>
+    </div>
 
     {% for event in events %}
 
-    <p>{{event.host}}</p>
-    <p>{{event.location}}</p>
-    <p>{{event.description}}</p>
-    <p>{{event.num_attendees}}</p>
+    
+    <h2>Event No. X</h2>
+    <img src='{{event.photo.url}}' width="45" height="45" border-radius="10">
+    <!-- <img class="images" src='{{post.author.profile.profile_pic.url}}' width="45" height="45" border-radius="10"> -->
+    <p>Host: {{event.host}}</p>
+    <p>{{event.photo}}</p>
+    <p>Location: {{event.location}}</p>
+    <p>Description: {{event.description}}</p>
+    <p>Going: {{event.num_attendees}}</p>
+
 
     {%endfor%}
-
-
-
-  
 </div>
 
 <div id="main">

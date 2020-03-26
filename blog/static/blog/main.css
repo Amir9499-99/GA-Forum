@@ -238,9 +238,13 @@ body {
     width: 100% !important;
     max-width: 100% !important;
 <<<<<<< HEAD
+<<<<<<< HEAD
     position: red;
 =======
     height: 50px;
+=======
+    height: 60px;
+>>>>>>> c9fc89b42fc5c7319a835d59c9615bbae3039ac5
     margin-left: -12px;
     background-color: black;
     position: fixed;
@@ -377,6 +381,35 @@ body {
 .flexMeCenter{
   display: flex;
   flex-direction: center;
+}
+
+#event-navbar {
+  background-color:#FFD62F;
+}
+
+/* added this */
+.sticky {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.sticky-container {
+  min-height: 100vh; /* will cover the 100% of viewport */
+  overflow: hidden;
+  display: block;
+  position: relative;
+  padding-top: 100px; /* height of your footer */
+}
+
+#event-navbar a{
+  color: black;
+  text-decoration: none;
+}
+
+.event-navbar-text:hover{
+  text-decoration: underline !important;
+  color:black !important;
 }
 
 .posts {
@@ -547,23 +580,10 @@ body {
 >>>>>>> 683d733a1731afe56b4f15d1c38ded5488f55143
 =======
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 .sidebar {
   height: 100%;
   width: 0;
-  opacity: 0.9;
+  opacity: 1;
   position: fixed;
   z-index: 20;
   top: 0;
@@ -584,15 +604,16 @@ body {
 }
 
 .sidebar a:hover {
-  color: #000000;
+  color: white;
 }
 
 .sidebar .closebtn {
   position: absolute;
-  top: 7%;
+  top: 6.5%;
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
+  color: black;
 }
 
 .openbtn {
