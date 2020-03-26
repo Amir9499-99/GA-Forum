@@ -1,5 +1,7 @@
 {% extends 'blog/base.html' %}
 {% load static %}
+{% load crispy_forms_tags%}
+
 
 {% block content %}
 
@@ -28,6 +30,32 @@
     <input id="post-add" type="submit" value="Add Post" class="btn btn-info">
   </div>
 </form>
+
+
+
+<div id="mySidebar" class="sidebar">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+  <a href="#">What's on the Calender?</a>
+    {{event_creation_form|crispy}}
+
+    {% for event in events %}
+
+    <p>{{event.host}}</p>
+    <p>{{event.location}}</p>
+    <p>{{event.description}}</p>
+    <p>{{event.num_attendees}}</p>
+
+    {%endfor%}
+
+
+
+  
+</div>
+
+<div id="main">
+  <button class="openbtn" onclick="openNav()">See Upcoming Events!</button>  
+</div>
+
 
 
 {% for post in posts %}
@@ -59,13 +87,17 @@
         <button class="collapsible">See Replys</button>
        
         <div class= "like-buttons">
-        <form class = "flexMe">
+        <form style="margin-left: 15px;"class = "flexMe" action="post/like/{{ post.id }}" method="POST">
+          {% csrf_token %}
+
           <button type = "submit" class="fa fa-thumbs-up"></button>
-          <p id="like">0</p>
+          <p class="text-muted">{{post.num_likes}}</p>
         </form>
-        <form class = "flexMe">
+        <form class = "flexMe" action="post/dislike/{{ post.id }}" method="POST">
+          {% csrf_token %}
+
           <button type = "submit" class="fa fa-thumbs-down"></button>
-          <p id="disLike">0</p>
+          <p class="text-muted">{{post.num_dislikes}}</p>
         </form>
         </div>
 
@@ -154,6 +186,10 @@
 {% endfor %}
 
 
+
+
+
+
 <script>
   var dt = new Date();
 
@@ -183,7 +219,7 @@
 
       var content = this.nextElementSibling;
       content = content.nextElementSibling;
-      content = content.nextElementSibling;
+      // content = content.nextElementSibling;
       if (content.style.maxHeight) {
         content.style.maxHeight = null;
       } else {
@@ -191,6 +227,17 @@
       }
     });
   }
+
+
+  function openNav() {
+  document.getElementById("mySidebar").style.width = "40%";
+  document.getElementById("main").style.marginLeft = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidebar").style.width = "0";
+  document.getElementById("main").style.marginLeft= "0";
+}
 </script>
 
 

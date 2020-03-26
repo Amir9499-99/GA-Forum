@@ -523,16 +523,93 @@ body {
   color:rgb(184, 53, 53);
   opacity: 0.8;
   border:none;
+  background-color:transparent;
 }
 .fa-thumbs-up{
   color:rgb(37, 155, 53);
   opacity: 0.9;
   border:none;
+  background-color:transparent;
+
+}
+
+.likeCount{
+  font-size: 15px;
+  
 }
 
 .like-buttons{
   display:flex;
   flex-direction:left;
 }
+<<<<<<< HEAD
 /* loat : left; */
 >>>>>>> 683d733a1731afe56b4f15d1c38ded5488f55143
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  opacity: 0.9;
+  position: fixed;
+  z-index: 20;
+  top: 0;
+  left: 0;
+  background-color: rgb(255, 255, 255);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidebar a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #161212;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar a:hover {
+  color: #000000;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 7%;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #111;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+}
+
+.openbtn:hover {
+  background-color: #444;
+}
+
+#main {
+  transition: margin-left .5s;
+  padding: 16px;
+}
+>>>>>>> 7c96bb9a68635ba4d56bce57f3d0792336665420

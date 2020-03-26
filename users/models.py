@@ -14,12 +14,5 @@ class Profile(models.Model):
 
 
 
-# class Event(models.Model):
-#     host = models.OneToOneField(User, on_delete=models.CASCADE)
-#     date = models.DateTimeField(default=timezone.now)
-#     location = models.TextField()
-
-
-
 
 # Create your models here.
