@@ -3,27 +3,32 @@
 {% load crispy_forms_tags%}
 
 
-{% block content %}
-
-
-<h1 style="text-align: center; color: white; font-weight: 600; font-size: 50px;">Home_Page</h1>
-
-<div class="center-user-status">
+{% block status %}
+<div>
 {% if user.is_authenticated %}
-<div class="flexMe">
-  <p class='whiter'>{{user.username}}</p>
+<div class="center-user-status">
   <div class="loggedIn"></div></p>
+  <p class='whiter'>{{user.username}}</p>
 </div>
 {%else%}
-<div class="flexMe">
-  <p class='whiter'>Not Logged In </p>
+<div class="center-user-status">
   <div class="loggedOut"></div>
+  <p class='whiter'>Not Logged In </p>
 </div>
 {%endif%}
 </div>
+{% endblock %}
 
 
-<form action="/post" method="post">
+{% block button %}
+<button class="openbtn" onclick="openNav()">See Upcoming Events!</button>  
+{% endblock %}
+
+
+{% block content %}
+<h1 style="text-align: center; color: white; font-weight: 600; font-size: 50px; margin-top: 0; padding-top: 0;">Home_Page</h1>
+
+<form action="/post" method="POST" autocomplete="off">
   {% csrf_token %}
   <div id="add-post-container">
     <input class="post-input" type="text" name="post-input" placeholder="    whats on your mind ....">
@@ -34,41 +39,58 @@
 
 
 <div id="mySidebar" class="sidebar">
-  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-  <div id="event-navbar" class="flexMe">
-    <a class="event-navbar-text" href="#">Upcoming Events</a>
-    <a class="event-navbar-text" href="#">Create Event</a>
+  <div id="event-navbar" class="flex-event-navbar">
+    <a class="event-navbar-text" id = "allEventsButton" href="#">Upcoming Events</a>
+    <a class="event-navbar-text" id = "createEventButton" href="#">Create Event</a>
+    <a href="javascript:void(0)" class="closebtn" class="event-navbar-text" onclick="closeNav()">×</a>
   </div>
-  <br><br><br>
   
 
-  <div class = "content-section francis">
-    {{event_creation_form|crispy}}
-    <div class = "form-group">
+  <div style="display: none" class = "content-section francis" id = "newEvent">
+
+    <h1 align = "center">Give Us The Details!</h1>
+
+    <form method = "POST" action = "new/event/" enctype = "multipart/form-data">
+      
+      {% csrf_token %}
+
+      {{event_creation_form|crispy}}
+      <div class = "form-group">
       <br><br>
       <button class = "btn btn-outline-info" type = "submit">Submit</button>
-  </div>
     </div>
+  </form>
 
+
+  </div>
+
+  <div class = "allEvents content-section">
+
+    <h1 class="event-name" align = "center" >All Registered Events!</h1>
     {% for event in events %}
 
-    
-    <h2>Event No. X</h2>
+    <div class="event-container">
+    <h2 class="event-name">Event No.  </h2>
+    <div class="event-content"> 
     <img src='{{event.photo.url}}' width="45" height="45" border-radius="10">
     <!-- <img class="images" src='{{post.author.profile.profile_pic.url}}' width="45" height="45" border-radius="10"> -->
-    <p>Host: {{event.host}}</p>
-    <p>{{event.photo}}</p>
-    <p>Location: {{event.location}}</p>
-    <p>Description: {{event.description}}</p>
-    <p>Going: {{event.num_attendees}}</p>
-
+    <p class="host">Host: {{event.host}}</p>
+    <p class="host">Date: {{event.date}}</p>
+    <p id="location">Location: {{event.location}}</p>
+    <p id="description">Description: {{event.description}}</p>
+    <p id="going">Going: {{event.num_attendees}}
+      <form action="" method="POST">
+        <button type="submit" id="going-btn" class="btn-outline-info" href="#">   Going</button>
+      </form>
+    </p>
+    </div>
+    </div>  
 
     {%endfor%}
+
+  </div>
 </div>
 
-<div id="main">
-  <button class="openbtn" onclick="openNav()">See Upcoming Events!</button>  
-</div>
 
 
 
@@ -117,12 +139,11 @@
 
         <div class='collapsibleContent'>
           {% for comment in post.reply_set.all %}
+          <div class="reply-content"><p class="dateRight"><span class="comment-date"><small class="text-muted"> {{ comment.date }}</small></span></div>
           <div class="flexMe replyBackground">
-            <img class="images" src='{{comment.author.profile.profile_pic.url}}' width="20" height="20"
+            <img class="images" src='{{comment.author.profile.profile_pic.url}}' width="30" height="30"
               border-radius="10" style="margin-left: 5px;">
-            <p style="margin-left: 15px;"><a class="mr-2" href="#">{{ comment.author }}:</a> {{ comment.strContent }}
-            </p>
-            <p class="dateRight"><span class="comment-date"><small class="text-muted"> {{ comment.date }}</small></span>
+            <p style="margin-left: 15px;"><span class="mr-3">{{ comment.author }}: </span>{{ comment.strContent }} 
             </p>
           </div>
           {% endfor %}
@@ -154,7 +175,7 @@
 =======
     </article>
 
-    <form action="reply/post/{{ post.id }}" method="POST">
+    <form action="reply/post/{{ post.id }}" autocomplete="off" method="POST">
       {% csrf_token %}
       <div class="media content-comment">
         <div class="comment-box">
@@ -245,13 +266,50 @@
 
   function openNav() {
   document.getElementById("mySidebar").style.width = "40%";
-  document.getElementById("main").style.marginLeft = "250px";
+  // document.getElementById("main").style.marginLeft = "250px";
 }
 
 function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
-  document.getElementById("main").style.marginLeft= "0";
+  // document.getElementById("main").style.marginLeft= "0";
 }
+
+
+let eventForm = document.getElementById('newEvent')
+let allEvents = document.getElementsByClassName('allEvents')
+let sideBar = document.getElementById('mySidebar')
+
+let allEventsButton = document.getElementById('allEventsButton')
+let createEventButton = document.getElementById('createEventButton')
+
+allEventsButton.addEventListener('click',function(){
+  eventForm.style.display = "none";
+  for(let i = 0; i<allEvents.length; i++){
+    allEvents[i].style.display = "";
+  }
+ 
+
+})
+
+createEventButton.addEventListener('click',function(){
+  for(let i = 0; i<allEvents.length; i++){
+    allEvents[i].style.display = "none";
+  }
+  eventForm.style.display = "";
+
+  
+})
+
+// for(let i = 0; i<allEvents.length; i++){
+//   allEvents[i].style.display = "none";
+// }
+// allEvents.style.display = "none";
+
+// sideBar.innerHTML = allEvents;
+// alert(sideBar)
+
+
+
 </script>
 
 

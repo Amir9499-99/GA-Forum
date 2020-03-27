@@ -7,10 +7,12 @@
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lobster+Two&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Boogaloo&display=swap" rel="stylesheet">
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Baloo+2&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
   <!-- <link rel="stylesheet" type="text/css" href="//netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"> -->
@@ -23,7 +25,6 @@
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
   <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
   <script src="{% static 'app.js'%}"></script>
-
 
 
 
@@ -43,6 +44,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarToggle">
           <div class="navbar-nav mr-auto">
+            {% block button %}{% endblock %}
             <a class="nav-item nav-link" href='/'>Home</a>
             <a class="nav-item nav-link" href="/about">About</a>
             <a class="nav-item nav-link" href="/profile">Profile</a>
@@ -63,6 +65,7 @@
       </div>
     </nav>
   </header>
+  {% block status %}{% endblock %}
   <main role="main" class="container">
     <div class="row" id="main-content">
       <!-- class="col-md-8" was applied to the line below -->
@@ -70,13 +73,13 @@
         {%if messages%}
         {%for message in messages%}
         <div class="alert alert-{{message.tags}}">
-
+          
           {{message}}
         </div>
         {%endfor%}
-
+        
         {%endif%}
-
+        
         {% block content %}{% endblock %}
       </div>
       <!-- <div class="col-md-4" id="sidebar">
@@ -97,7 +100,14 @@
     </div>
 
     <div class="footer2">
-      <p>Footer</p>
+        <div style="display: float; float: left; bottom: 0; margin-left: 1%;">
+        <!-- <div style="display:inline;"> -->
+          <p>Copyright © 2020 - 2021</p>
+        </div>
+        <!-- <div style="display: float; float: left; margin-top: 0.5%; margin-left: 1%;"> -->
+        <!-- <div style="display: inline-block;"> -->
+          <!-- <p><em>GA_Forum</em></p> -->
+        <!-- </div> -->
     </div>
 
   </main>

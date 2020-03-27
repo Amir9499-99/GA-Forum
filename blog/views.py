@@ -14,12 +14,12 @@ from .forms import EventCreationForm
 
 def home(request):
 
-    event_creation_form = EventCreationForm()
+    event_creation_form = EventCreationForm(initial={'host': request.user})
 
     context = {
         'posts':reversed(Post.objects.all()),
         'event_creation_form': event_creation_form,
-        'events':Event.objects.all(),
+        'events':reversed(Event.objects.all()),
     }
     return render(request,'blog/home.html',context)
 
@@ -65,3 +65,29 @@ def add_dislike(request,post_id):
     next = request.POST.get('currentpath', '/')
     return redirect(next)
      
+@login_required
+def create_event(request):
+    # print('hitting in create event')
+    
+    # request.POST = request.POST.copy()
+    # user= request.user._wrapped if hasattr(request.user,'_wrapped') else request.user
+    # request.POST['host'] = user
+
+  
+
+    # request.POST['host'] = request.user
+    
+    form = EventCreationForm(request.POST,request.FILES)
+    if form.is_valid():
+        form.save()
+        messages.success(request,f'Congrats {request.user.username} on your new Event!')
+        return redirect('blog-home')
+
+    else:
+        print('\n\n\n')
+        print(form)
+        print('\n\n\n')
+        messages.error(request,f'We could not create your event, {request.user.username} ')
+        return redirect('blog-home')
+
+    return redirect('blog-home')

@@ -26,7 +26,7 @@ def viewProfile(request):
     if request.method == 'POST':
         user_edit_form = UserEditForm(request.POST,instance = request.user)
         profile_edit_form = ProfileEditForm(request.POST,request.FILES, instance = request.user.profile)
-        
+          
         if user_edit_form.is_valid() and profile_edit_form.is_valid():
             user_edit_form.save()
             profile_edit_form.save()
@@ -47,5 +47,6 @@ def viewProfile(request):
     }
 
     return render(request,'users/profile.html',context)
+
 
 

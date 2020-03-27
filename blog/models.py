@@ -9,6 +9,7 @@ from datetime import date
 
 
 
+
 class Post(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     strContent = models.TextField()
@@ -35,12 +36,11 @@ class Reply(models.Model):
 
 
 class Event(models.Model):
-    host = models.OneToOneField(User, on_delete=models.CASCADE)
+    host = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     location = models.CharField(max_length=150,default='over zoom :(')
     description = models.CharField(max_length=300,default='very fun time')
     num_attendees = models.IntegerField(default=0)
-    photo = models.ImageField(default='profile_pics/unknown.png',upload_to='profile_pics')
+    photo = models.ImageField(default='profile_pics/cake.png',upload_to='profile_pics')
 
-    # models.ImageField(default='profile_pics/unknown.png',upload_to='profile_pics')
 
