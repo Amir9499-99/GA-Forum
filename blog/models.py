@@ -39,8 +39,10 @@ class Event(models.Model):
     host = models.ForeignKey(User, on_delete=models.CASCADE)
     date = models.DateField(default=timezone.now)
     location = models.CharField(max_length=150,default='over zoom :(')
+    name = models.CharField(max_length=150,default='Party Time!!!')
     description = models.CharField(max_length=300,default='very fun time')
     num_attendees = models.IntegerField(default=0)
+    num_nopes = models.IntegerField(default=0)
     photo = models.ImageField(default='profile_pics/cake.png',upload_to='profile_pics')
 
 

@@ -4,7 +4,7 @@
 
 
 {% block status %}
-<div>
+<div id = 'loginStatus'>
 {% if user.is_authenticated %}
 <div class="center-user-status">
   <div class="loggedIn"></div></p>
@@ -40,9 +40,9 @@
 
 <div id="mySidebar" class="sidebar">
   <div id="event-navbar" class="flex-event-navbar">
-    <a class="event-navbar-text" id = "allEventsButton" href="#">Upcoming Events</a>
-    <a class="event-navbar-text" id = "createEventButton" href="#">Create Event</a>
-    <a href="javascript:void(0)" class="closebtn" class="event-navbar-text" onclick="closeNav()">×</a>
+    <a class="event-navbar-text" id = "allEventsButton" href="#">Upcoming</a>
+    <a class="event-navbar-text" id = "createEventButton" href="#">Create</a>
+    <a href="javascript:void(0)" class="closebtn" class="event-navbar-text closebtn" onclick="closeNav()">x</a>
   </div>
   
 
@@ -64,27 +64,46 @@
 
   </div>
 
-  <div class = "allEvents content-section">
-
-    <h1 class="event-name" align = "center" >All Registered Events!</h1>
+  <div class = "allEvents">
+    <br><br>
+    <h1 class="registered" align = "center" >All Registered Events!</h1>
+    <br><br>
     {% for event in events %}
 
     <div class="event-container">
-    <h2 class="event-name">Event No.  </h2>
-    <div class="event-content"> 
-    <img src='{{event.photo.url}}' width="45" height="45" border-radius="10">
+    <h2 class="event-name">{{event.name}}</h2>
+    <div class="event-content content-section"> 
+    <img class = "medium_image" src='{{event.photo.url}}' border-radius="10">
     <!-- <img class="images" src='{{post.author.profile.profile_pic.url}}' width="45" height="45" border-radius="10"> -->
     <p class="host">Host: {{event.host}}</p>
     <p class="host">Date: {{event.date}}</p>
     <p id="location">Location: {{event.location}}</p>
     <p id="description">Description: {{event.description}}</p>
-    <p id="going">Going: {{event.num_attendees}}
-      <form action="" method="POST">
-        <button type="submit" id="going-btn" class="btn-outline-info" href="#">   Going</button>
+
+    <div class = "flexMe">
+    <p class="going">Going: {{event.num_attendees}}</p>
+      <form action="event/yes/{{ event.id }}" method="POST">
+        {% csrf_token %}
+
+        <button type="submit" id="going-btn" class="btn-outline-info" href="#">   Yes I'm Going</button>
       </form>
-    </p>
+
     </div>
-    </div>  
+    
+
+    <div class = "flexMe">
+      <p class="nope">Nope: {{event.num_nopes}}</p>
+    <form action="event/no/{{ event.id }}" method="POST">
+        {% csrf_token %}
+        <button type="submit" id="going-btn" class="btn-outline-info" href="#">   No Way Jose</button>
+    </form>
+  </div>
+
+
+
+    </div>
+    </div> 
+    <br><br> 
 
     {%endfor%}
 
@@ -101,7 +120,7 @@
 
   <div class="posts">
     <article class="media content-section">
-      <img class="images" src='{{post.author.profile.profile_pic.url}}' width="45" height="45" border-radius="10">
+      <img class="images medium_image" src='{{post.author.profile.profile_pic.url}}' width="45" height="45" border-radius="10">
 
       <div class="media-body">
         <div class="article-metadata">
@@ -136,17 +155,23 @@
           <p class="text-muted">{{post.num_dislikes}}</p>
         </form>
         </div>
-
+ 
         <div class='collapsibleContent'>
+          {% if post.reply_set.count == 0 %}
+          <div class="replyBackground">
+          <p style="margin-left: 15px;">Be the first to reply!</p>
+        </div>
+          {% else %}
           {% for comment in post.reply_set.all %}
-          <div class="reply-content"><p class="dateRight"><span class="comment-date"><small class="text-muted"> {{ comment.date }}</small></span></div>
-          <div class="flexMe replyBackground">
-            <img class="images" src='{{comment.author.profile.profile_pic.url}}' width="30" height="30"
+            <div class="reply-content"><p class="dateRight"><span class="comment-date"><small class="text-muted"> {{ comment.date }}</small></span></div>
+            <div class="flexMe replyBackground">
+              <img class="images little_image" src='{{comment.author.profile.profile_pic.url}}' width="30" height="30"
               border-radius="10" style="margin-left: 5px;">
-            <p style="margin-left: 15px;"><span class="mr-3">{{ comment.author }}: </span>{{ comment.strContent }} 
-            </p>
-          </div>
-          {% endfor %}
+              <p style="margin-left: 4px;"><span class="mr-3">{{ comment.author }}: </span>{{ comment.strContent }} </p>
+            </div>
+            {% endfor %}
+            {% endif %}
+            
         </div>
       </div>
 <<<<<<< HEAD
@@ -191,7 +216,7 @@
   </div>
 
 
-  <div class=" white-text" class="profile-wrapper">
+  <!-- <div class="white-text" class="profile-wrapper">
     <div style="display: none" class="row login_box">
       <div class="col-md-12 col-xs-12" align="center">
         <div class="line">
@@ -213,7 +238,10 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+
+
 </div>
 
 
@@ -226,22 +254,22 @@
 
 
 <script>
-  var dt = new Date();
+  // var dt = new Date();
 
-  document.getElementById("datetime").innerHTML = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  images = document.querySelectorAll('.images');
-  profileCards = document.querySelectorAll('.login_box');
+  // document.getElementById("datetime").innerHTML = dt.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  // images = document.querySelectorAll('.images');
+  // profileCards = document.querySelectorAll('.login_box');
 
-  for (let i = 0; i < images.length; i++) {
-    images[i].addEventListener('click', function () {
-      if (profileCards[i].style.display === '') {
+  // for (let i = 0; i < images.length; i++) {
+  //   images[i].addEventListener('click', function () {
+  //     if (profileCards[i].style.display === '') {
 
-        profileCards[i].style.display = 'none';
-      } else {
-        profileCards[i].style.display = '';
-      }
-    })
-  }
+  //       profileCards[i].style.display = 'none';
+  //     } else {
+  //       profileCards[i].style.display = '';
+  //     }
+  //   })
+  // }
 
 
 
@@ -265,7 +293,12 @@
 
 
   function openNav() {
-  document.getElementById("mySidebar").style.width = "40%";
+  if(document.getElementById("mySidebar").style.width == "40%"){
+    document.getElementById("mySidebar").style.width = "0%";
+  }else{
+    document.getElementById("mySidebar").style.width = "40%";
+
+  }
   // document.getElementById("main").style.marginLeft = "250px";
 }
 
@@ -287,7 +320,6 @@ allEventsButton.addEventListener('click',function(){
   for(let i = 0; i<allEvents.length; i++){
     allEvents[i].style.display = "";
   }
- 
 
 })
 
@@ -297,7 +329,6 @@ createEventButton.addEventListener('click',function(){
   }
   eventForm.style.display = "";
 
-  
 })
 
 // for(let i = 0; i<allEvents.length; i++){

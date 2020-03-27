@@ -15,32 +15,46 @@ from .forms import EventCreationForm
 def home(request):
 
     event_creation_form = EventCreationForm(initial={'host': request.user})
+    events = Event.objects.order_by('-date')
+
+    posts = Post.objects.order_by('-date')
+
 
     context = {
-        'posts':reversed(Post.objects.all()),
+        'posts':posts,
         'event_creation_form': event_creation_form,
-        'events':reversed(Event.objects.all()),
+        'events':reversed(events),
     }
     return render(request,'blog/home.html',context)
 
 def about(request):
     return render(request,'blog/about.html')
 
-@login_required
-def post_create(request):
-    post = Post( author = request.user, strContent = request.POST.get('post-input') )
-    print(post)
-    post.save()
-    next = request.POST.get('currentpath', '/')
-    return redirect(next)
+# @login_required //was creating problems
 
-@login_required
+def post_create(request):
+    if request.user.is_authenticated:
+        post = Post( author = request.user, strContent = request.POST.get('post-input') )
+        print(post)
+        post.save()
+        next = request.POST.get('currentpath', '/')
+        return redirect(next)
+    else:
+        return redirect('login/')
+
+
+
 def reply_create(request, post_id):
-    post = Post.objects.get(id = post_id)
-    reply = Reply( author = request.user, post = post, strContent = request.POST.get('input-comment') )
-    reply.save()
-    next = request.POST.get('currentpath', '/')
-    return redirect(next)
+    if request.user.is_authenticated:
+        post = Post.objects.get(id = post_id)
+        reply = Reply( author = request.user, post = post, strContent = request.POST.get('input-comment') )
+        reply.save()
+        next = request.POST.get('currentpath', '/')
+        return redirect(next)
+    else:
+        return redirect('login/')
+
+
 
 
 def post_delete(request,post_id):
@@ -64,19 +78,28 @@ def add_dislike(request,post_id):
     post_to_dislike.save()
     next = request.POST.get('currentpath', '/')
     return redirect(next)
-     
+
+@login_required
+def add_yes(request,event_id):
+    event_to_yes = Event.objects.filter(id=event_id)[0]
+    event_to_yes.num_attendees += 1
+    event_to_yes.save()
+    next = request.POST.get('currentpath', '/')
+    return redirect(next)
+
+
+@login_required
+def add_no(request,event_id):
+    event_to_no = Event.objects.filter(id=event_id)[0]
+    event_to_no.num_nopes += 1
+    event_to_no.save()
+    next = request.POST.get('currentpath', '/')
+    return redirect(next)
+
+
 @login_required
 def create_event(request):
-    # print('hitting in create event')
-    
-    # request.POST = request.POST.copy()
-    # user= request.user._wrapped if hasattr(request.user,'_wrapped') else request.user
-    # request.POST['host'] = user
-
-  
-
-    # request.POST['host'] = request.user
-    
+   
     form = EventCreationForm(request.POST,request.FILES)
     if form.is_valid():
         form.save()

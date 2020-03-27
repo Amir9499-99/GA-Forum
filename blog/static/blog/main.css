@@ -20,6 +20,30 @@ body {
     padding: 3% 2% 2% 0;
   }
 
+  .little_image{
+    display: block;
+    max-width:25px;
+    max-height:25px;
+    width: auto;
+    height: auto;
+  }
+
+  .medium_image{
+    display: block;
+  max-width:45px;
+  max-height:45px;
+  width: auto;
+  height: auto;
+  }
+
+  .big_image{
+    display: block;
+    max-width:150px;
+    max-height:150px;
+    width: auto;
+    height: auto;
+  }
+
   .reply-content{
     position: relative;
     right: 0;
@@ -404,16 +428,19 @@ body {
 }
 
 #event-navbar {
-  background-color:#FFD62F;
+  background-color:rgb(197, 31, 31);
   position: sticky;
   /* position: absolute; */
   top: 0;
+  
 }
 
 .flex-event-navbar {
   display: flex;
   flex-direction: left;
   justify-content: center;
+  margin-top: 0;
+  padding-top: 0;
 }
 
 /* added this */
@@ -432,17 +459,26 @@ body {
 }
 
 #event-navbar a{
-  color: black;
+  color: white;
   text-decoration: none;
+}
+
+#createEventButton{
+  /* margin-left: 4%; */
+  text-align: center;
 }
 
 .event-navbar-text {
   padding-bottom: 0;
-  margin-bottom: 0;  
+  margin-bottom: 0;
+  width: 100%;
+  font-size: 24px !important;
+  border-radius: 10px;
+  height: 20px;
 }
 
 .event-navbar-text:hover{
-  text-decoration: underline !important;
+  /* text-decoration: underline !important; */
   color:black !important;
 }
 
@@ -485,8 +521,8 @@ body {
 }
 
 .images {
-  margin-right: 5px;
-  padding-right: -2px;
+  margin-right: 8px;
+  padding-right: 1px;
   border-radius: 50%;
 }
 
@@ -556,7 +592,6 @@ body {
     border: 1px solid black;
     text-align: center;
     background-size: contain;
-    height: nd00px;
     width: 100%;
     position: relative;
     z-index: -2;
@@ -615,7 +650,8 @@ body {
 =======
 
 .sidebar {
-
+  box-shadow: 3px 3px 3px 3px rgba(116, 116, 116, 0.486);
+  border: none;
   height: 100%;
   width: 0;
   opacity: 1;
@@ -627,6 +663,7 @@ body {
   overflow-x: hidden;
   transition: 0.5s;
   padding-top: 60px;
+  margin-bottom: 0;
   font-family: 'Lobster Two', cursive;
 }
 
@@ -652,7 +689,7 @@ body {
   font-size: 25px;
   margin-left: 50px;
   color: black;
-  vertical-align: middle !important; */
+  vertical-align: middle !important; 
 }
 
 .openbtn {
@@ -666,7 +703,7 @@ body {
 }
 
 .openbtn:hover {
-  background-color:#FFD62F;
+  background-color:rgb(49, 176, 213);
   color: black;
 }
 
@@ -676,21 +713,21 @@ body {
 }
 
 .allEvents {
-  /* background-image: linear-gradient(to bottom, #ff4e50, #f9d423); */
-  background-image: url(https://i.pinimg.com/736x/fc/24/e3/fc24e3908c3a42d0470c90171ac8ac8b.jpg);
+  background-image: url(https://i.imgur.com/PdGWsvz.jpg);
   background-repeat: no-repeat;
-  background-size: initial;
+  background-size: cover;
   background-attachment: fixed;
+  
 }
 
 .event-container{
   margin: 10px 10px;
   padding: 0 20px;
-  color: rgb(0, 0, 0);
+  color: black;
 }
 
 .event-content {
-  border: 2px solid white;
+  border: 2px solid black;
   padding: 10px;
   box-shadow: 3px 3px 3px 3px rgba(116, 116, 116, 0.486);
 } 
@@ -702,7 +739,7 @@ body {
 
 .event-container h2{
   text-align: center;
-  border-bottom: white solid 2px;
+  /* border-bottom: black solid 2px; */
 }
 
 .event-container p{
@@ -712,33 +749,43 @@ body {
 }
 
 h1{
-  color: white;
+  color: black;
 }
 <<<<<<< HEAD
 >>>>>>> 7c96bb9a68635ba4d56bce57f3d0792336665420
 =======
 
+.registered{
+  color: rgb(255, 255, 255);
+  padding-top: 0;
+  margin-top: 0;
+  font-size: 44px;
+  font-weight: 800;
+}
+
+
 .event-name{
-  color: white;
+  color: rgb(255, 255, 255);
+  padding-top: 0;
+  margin-top: 0;
+  font-size: 24px;
+  font-style: bold;
+
 }
 
 .host{
-  font-size: 26px;
+  font-size: 26px !important;
   font-weight: bold;
 }
 
-#location{
-  font-family: 'Baloo 2', cursive !important;
+#loginStatus{
+  margin-right:4%;
+
+}
+#location, #description, .going{
+  font-family: 'Lobster Two', cursive; 
 }
 
-#description {
-  font-family: 'Baloo 2', cursive !important;
-}
-
-#going{
-  float: left;
-  font-family: 'Baloo 2', cursive !important;
-}
 
 #going-btn{
   border-radius: 5px;
